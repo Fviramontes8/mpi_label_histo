@@ -10,8 +10,7 @@
 #include <vector>
 
 #include "../include/histo_from_dir.hpp"
-#include "../include/mpi_histo_from_dir.hpp"
-#include "../include/timer.hpp"
+#include "../include/mpi_histo.hpp"
 
 void print_dir(const std::filesystem::directory_iterator& dir) {
 	for (const auto& file: dir) {
@@ -43,41 +42,24 @@ int main(int argc, char* argv[])  {
 	std::ranges::for_each(mpi_core_histo, [](int& x) { x=0; });
 	std::ranges::for_each(mpi_root_histo, [](int& x) { x=0; });
 
-	{
-		frankie::Timer t;
-		histo_from_dir(label_dir, expr, histo);
-	}
-	if (proc == 0) {
-		std::cout << "Naive histo:\n\t"; 
-		std::ranges::for_each(
-			histo,
-			[](const int& x) {
-				std::cout << x << ' ';
-			}
-		);
-		std::cout << '\n';
-	}
-
 	if ((iter_bound % num_procs != 0) && (proc == (num_procs-1))) {
 		iter_bound += (iter_bound % num_procs) + 1;
 	}
 
-	{
-		frankie::Timer t;
-		mpi_histo_from_dir(
-			files_in_dir.begin() + start_idx,
-			files_in_dir.begin() + start_idx + iter_bound,
-			expr, 
-			mpi_core_histo,
-			mpi_root_histo
-		);
-	}
+	mpi_histo(
+		files_in_dir.begin() + start_idx,
+		files_in_dir.begin() + start_idx + iter_bound,
+		expr, 
+		mpi_core_histo,
+		mpi_root_histo
+	);
+
 	if (proc == 0) {
 		std::cout << "MPI histo:\n\t";
 		std::ranges::for_each(
 			mpi_root_histo,
 			[](const int& x) {
-			std::cout << x << ' ';
+				std::cout << x << ' ';
 			}
 		);
 		std::cout << '\n';
@@ -86,7 +68,7 @@ int main(int argc, char* argv[])  {
 		outfile.open("histo_data.txt");
 		if (outfile.is_open()) {
 			std::ranges::for_each(
-				histo, 
+				mpi_root_histo, 
 				[&outfile](const int& x) { 
 					outfile << x << ' ';
 				}
