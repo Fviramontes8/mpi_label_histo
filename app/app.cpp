@@ -82,17 +82,17 @@ int main(int argc, char* argv[])  {
 		);
 		std::cout << '\n';
 
-	std::ofstream outfile;
-	outfile.open("sequential_histo.txt");
-	if (outfile.is_open()) {
-		std::ranges::for_each(
-			histo, 
-			[&outfile](const int& x) { 
-				outfile << x << ' ';
-			}
-		);
-		outfile.close();
-	}
+		std::ofstream outfile;
+		outfile.open("histo_data.txt");
+		if (outfile.is_open()) {
+			std::ranges::for_each(
+				histo, 
+				[&outfile](const int& x) { 
+					outfile << x << ' ';
+				}
+			);
+			outfile.close();
+		}
 	}
 
 	MPI_Finalize();
