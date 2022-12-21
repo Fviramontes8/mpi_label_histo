@@ -3,9 +3,9 @@
 #include <mpi/mpi.h>
 #include <span>
 
-#include "../include/mpi_histo_from_dir.hpp"
+#include "../include/mpi_histo.hpp"
 
-void mpi_histo_from_dir(
+void mpi_histo(
 		const directory_vector::const_iterator begin_dir,
 		const directory_vector::const_iterator end_dir,
 		const std::regex& expr,

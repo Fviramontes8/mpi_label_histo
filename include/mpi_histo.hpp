@@ -5,7 +5,7 @@
 
 using directory_vector = std::vector<std::filesystem::directory_entry>;
 
-void mpi_histo_from_dir(
+void mpi_histo(
 		const directory_vector::const_iterator begin_dir,
 		const directory_vector::const_iterator end_dir,
 		const std::regex& expr,
