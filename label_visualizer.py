@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def main() -> None:
-    with open("sequential_histo.txt") as infile:
+    with open("histo_data.txt") as infile:
         file_data = infile.readlines()
         list_data = file_data[0].split(' ')
 
