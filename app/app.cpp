@@ -13,12 +13,6 @@
 #include "../include/mpi_histo_from_dir.hpp"
 #include "../include/timer.hpp"
 
-void print_dir(const std::filesystem::directory_iterator& dir) {
-	for (const auto& file: dir) {
-		std::cout << file.path() << '\n';
-	}
-}
-
 int main(int argc, char* argv[])  {
 	MPI_Init(&argc, &argv);
 	const std::filesystem::path current_dir = std::filesystem::current_path();
@@ -45,8 +39,9 @@ int main(int argc, char* argv[])  {
 
 	{
 		frankie::Timer t;
-		histo_from_dir(label_dir, expr, histo);
+		frankie::histo_from_dir(label_dir, expr, histo);
 	}
+
 	if (proc == 0) {
 		std::cout << "Naive histo:\n\t"; 
 		std::ranges::for_each(
@@ -64,7 +59,7 @@ int main(int argc, char* argv[])  {
 
 	{
 		frankie::Timer t;
-		mpi_histo_from_dir(
+		frankie::mpi_histo_from_dir(
 			files_in_dir.begin() + start_idx,
 			files_in_dir.begin() + start_idx + iter_bound,
 			expr, 
@@ -72,12 +67,13 @@ int main(int argc, char* argv[])  {
 			mpi_root_histo
 		);
 	}
+
 	if (proc == 0) {
 		std::cout << "MPI histo:\n\t";
 		std::ranges::for_each(
 			mpi_root_histo,
 			[](const int& x) {
-			std::cout << x << ' ';
+				std::cout << x << ' ';
 			}
 		);
 		std::cout << '\n';
