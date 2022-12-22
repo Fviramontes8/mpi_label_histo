@@ -9,7 +9,6 @@
 #include <regex>
 #include <vector>
 
-#include "../include/histo_from_dir.hpp"
 #include "../include/mpi_histo.hpp"
 
 void print_dir(const std::filesystem::directory_iterator& dir) {

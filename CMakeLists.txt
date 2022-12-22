@@ -11,7 +11,7 @@ project(
 )
 
 find_package(MPI)
-include_directories(SYSTME ${MPI_INCLUDE_PATH})
+include_directories(SYSTEM ${MPI_INCLUDE_PATH})
 
 include_directories(${PROJECT_SOURCE_DIR})
 
