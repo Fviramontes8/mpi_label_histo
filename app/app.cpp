@@ -11,12 +11,6 @@
 
 #include "../include/mpi_histo.hpp"
 
-void print_dir(const std::filesystem::directory_iterator& dir) {
-	for (const auto& file: dir) {
-		std::cout << file.path() << '\n';
-	}
-}
-
 int main(int argc, char* argv[])  {
 	MPI_Init(&argc, &argv);
 	const std::filesystem::path current_dir = std::filesystem::current_path();
