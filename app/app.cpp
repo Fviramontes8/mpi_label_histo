@@ -49,6 +49,7 @@ int main(int argc, char* argv[])  {
 	}
 
 	if (!vm.count("size")) {
+		MPI_Finalize();
 		throw std::invalid_argument("The (--size/-s) command line argument is required");
 	}
 
