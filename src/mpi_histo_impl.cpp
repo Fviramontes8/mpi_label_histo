@@ -9,8 +9,8 @@ void mpi_histo(
 		const directory_vector::const_iterator begin_dir,
 		const directory_vector::const_iterator end_dir,
 		const std::regex& expr,
-		std::array<int, 30>& core_histo,
-		std::array<int, 30>& root_histo) {
+		std::vector<int>& core_histo,
+		std::vector<int>& root_histo) {
 	std::smatch expr_match;
 	for (const auto& filename: std::span(begin_dir, end_dir)) {
 		std::ifstream label_file;
