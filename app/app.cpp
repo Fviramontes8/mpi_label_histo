@@ -21,16 +21,23 @@ int main(int argc, char* argv[])  {
 	desc.add_options()
 		("help,h", "Show the help message")
 		("path,p", po::value<std::string>(), "Required path to directory to calculate histogram, it should be relative to the executable path")
-		("size,s", po::value<int>(), "Size of histogram");
+		("size,s", po::value<int>(), "Size of histogram")
+		("outfile,o", po::value<std::string>(), "Filename (.txt) where resulting histogram will be stored");
 
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc, argv, desc), vm);
 	po::notify(vm);
 
+	int proc, num_procs;
+	MPI_Comm_rank(MPI_COMM_WORLD, &proc);
+	MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
+
 	if (vm.count("help")) {
-		std::cout << desc << '\n';
+		if (proc == 0) {
+			std::cout << desc << '\n';
+		}
 		MPI_Finalize();
-		return 1;
+		return 0;
 	}
 
 	const std::filesystem::path current_dir = std::filesystem::current_path();
@@ -53,6 +60,14 @@ int main(int argc, char* argv[])  {
 		throw std::invalid_argument("The (--size/-s) command line argument is required");
 	}
 
+	std::string outfile_name;
+	if (vm.count("outfile")) {
+		outfile_name = vm["outfile"].as<std::string>();
+	}
+	else {
+		outfile_name = "histo_data.txt";
+	}
+
 	const int histo_size = vm["size"].as<int>();
 
 	const std::filesystem::directory_iterator label_dir{label_path};
@@ -61,9 +76,6 @@ int main(int argc, char* argv[])  {
 	);
 	const std::regex expr{"\\d+"};
 
-	int proc, num_procs;
-	MPI_Comm_rank(MPI_COMM_WORLD, &proc);
-	MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
 	int iter_bound = files_in_dir.size() / num_procs;
 	const int start_idx = iter_bound * proc;
 
@@ -85,7 +97,7 @@ int main(int argc, char* argv[])  {
 
 	if (proc == 0) {
 		std::ofstream outfile;
-		outfile.open("histo_data.txt");
+		outfile.open(outfile_name);
 		if (outfile.is_open()) {
 			std::ranges::for_each(
 				mpi_root_histo, 
