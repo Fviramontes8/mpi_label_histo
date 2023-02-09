@@ -5,7 +5,6 @@
 #include <iostream>
 #include <mpi/mpi.h>
 #include <stdexcept>
-#include <ranges>
 #include <regex>
 #include <vector>
 
@@ -98,8 +97,9 @@ int main(int argc, char* argv[])  {
 		std::ofstream outfile;
 		outfile.open(outfile_name);
 		if (outfile.is_open()) {
-			std::ranges::for_each(
-				mpi_root_histo, 
+			std::for_each(
+				mpi_root_histo.begin(), 
+				mpi_root_histo.end(),
 				[&outfile](const int& x) { 
 					outfile << x << ' ';
 				}
