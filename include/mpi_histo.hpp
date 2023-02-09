@@ -1,6 +1,5 @@
 #include <filesystem>
 #include <regex>
-#include <span>
 #include <vector>
 
 using directory_vector = std::vector<std::filesystem::directory_entry>;

@@ -1,7 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <mpi/mpi.h>
-#include <span>
+#include <vector>
 
 #include "../include/mpi_histo.hpp"
 
@@ -12,7 +12,7 @@ void mpi_histo(
 		std::vector<int>& core_histo,
 		std::vector<int>& root_histo) {
 	std::smatch expr_match;
-	for (const auto& filename: std::span(begin_dir, end_dir)) {
+	for (const auto& filename: std::vector(begin_dir, end_dir)) {
 		std::ifstream label_file;
 		label_file.open(filename.path());
 		if(label_file.is_open()) {

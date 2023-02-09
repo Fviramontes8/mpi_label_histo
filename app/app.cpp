@@ -5,7 +5,6 @@
 #include <iostream>
 #include <mpi/mpi.h>
 #include <stdexcept>
-#include <span>
 #include <ranges>
 #include <regex>
 #include <vector>
@@ -17,6 +16,10 @@ namespace po = boost::program_options;
 int main(int argc, char* argv[])  {
 	MPI_Init(&argc, &argv);
 
+	int proc, num_procs;
+	MPI_Comm_rank(MPI_COMM_WORLD, &proc);
+	MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
+
 	po::options_description desc("Permitted options");
 	desc.add_options()
 		("help,h", "Show the help message")
@@ -27,10 +30,6 @@ int main(int argc, char* argv[])  {
 	po::variables_map vm;
 	po::store(po::parse_command_line(argc, argv, desc), vm);
 	po::notify(vm);
-
-	int proc, num_procs;
-	MPI_Comm_rank(MPI_COMM_WORLD, &proc);
-	MPI_Comm_size(MPI_COMM_WORLD, &num_procs);
 
 	if (vm.count("help")) {
 		if (proc == 0) {
