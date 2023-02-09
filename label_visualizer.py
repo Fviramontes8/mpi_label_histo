@@ -1,8 +1,23 @@
+import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 
-def main() -> None:
-    with open("histo_data.txt") as infile:
+def parse_opt():
+    parser = argparse.ArgumentParser(
+        description="Script to plot data from mpi_label_histo"
+    )
+    parser.add_argument(
+        "--file-path",
+        type=str,
+        action="store",
+        required=True,
+        help="File to open with histogram data"
+    )
+    return parser.parse_args()
+
+
+def main(opt: argparse.Namespace) -> None:
+    with open(opt.file_path) as infile:
         file_data = infile.readlines()
         list_data = file_data[0].split(' ')
 
@@ -17,4 +32,5 @@ def main() -> None:
     plt.show()
 
 if __name__ == "__main__":
-    main()
+    opt = parse_opt()
+    main(opt)
