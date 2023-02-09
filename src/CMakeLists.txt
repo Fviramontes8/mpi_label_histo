@@ -4,6 +4,9 @@ set(HEADER_MPI_HISTO_DIR
 set(HEADER_PRINT_DIRECTORY
 	"${mpi_label_histo_SOURCE_DIR}/include/print_directory.hpp"
 )
+set(HEADER_PARSE_ARGS
+	"${mpi_label_histo_SOURCE_DIR}/include/arg_parser.hpp"
+)
 
 add_library(mpi_histo_from_dir_lib
 	mpi_histo_impl.cpp
@@ -15,8 +18,13 @@ add_library(print_directory_lib
 	${HEADER_PRINT_DIRECTORY}
 )
 
+add_library(arg_parser_lib
+	arg_parser_impl.cpp
+	${HEADER_PRINT_DIRECTORY}
+)
+
 source_group(
 	TREE "${PROJECT_SOURCE_DIR}/include"
 	PREFIX "Header Files"
-	FILES ${HEADER_MPI_HISTO_DIR} ${HEADER_PRINT_DIRECTORY}
+	FILES ${HEADER_MPI_HISTO_DIR} ${HEADER_PRINT_DIRECTORY} ${HEADER_PARSE_ARGS}
 )
