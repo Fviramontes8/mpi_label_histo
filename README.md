@@ -1,5 +1,7 @@
 # MPI LABEL HISTO
 
+![](https://github.com/fviramontes8/mpi_label_histo/actions/workflows/cmake.yml/badge.svg)
+
 ## Description
 Opens a folder containing many text (txt) files, uses a regular expression to extract information of interest (like the first number of each row). It uses that information to create a histogram. When all files have been analyzed, process 0 then writes the aggregated results into a text file.
 
