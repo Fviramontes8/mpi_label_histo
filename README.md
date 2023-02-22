@@ -41,7 +41,8 @@ Permitted options:
   -h [ --help ]         Show the help message
   -p [ --path ] arg     Required path to directory to calculate histogram, it 
                         should be relative to the executable path
-  -s [ --size ] arg     Size of histogram
+  -s [ --size ] arg     Size of histogram, typically the number of classes in 
+                        dataset
   -o [ --outfile ] arg  Filename (.txt) where resulting histogram will be 
                         stored
 ```

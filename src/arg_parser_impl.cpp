@@ -12,7 +12,7 @@ namespace fenk {
 		desc.add_options()
 			("help,h", "Show the help message")
 			("path,p", po::value<std::string>(), "Required path to directory to calculate histogram, it should be relative to the executable path")
-			("size,s", po::value<int>(), "Size of histogram")
+			("size,s", po::value<int>(), "Size of histogram, typically the number of classes in dataset")
 			("outfile,o", po::value<std::string>(), "Filename (.txt) where resulting histogram will be stored");
 
 		po::variables_map vm;
