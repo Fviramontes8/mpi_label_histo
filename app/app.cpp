@@ -10,6 +10,7 @@
 
 #include "../include/mpi_histo.hpp"
 #include "../include/arg_parser.hpp"
+#include "../include/histo_io.hpp"
 
 int main(int argc, char* argv[])  {
 	MPI_Init(&argc, &argv);
@@ -54,18 +55,7 @@ int main(int argc, char* argv[])  {
 	);
 
 	if (proc == 0) {
-		std::ofstream outfile;
-		outfile.open(args.outfile);
-		if (outfile.is_open()) {
-			std::for_each(
-				mpi_root_histo.begin(), 
-				mpi_root_histo.end(),
-				[&outfile](const int& x) { 
-					outfile << x << ' ';
-				}
-			);
-			outfile.close();
-		}
+		fenk::write_histo_to_file(args.outfile, mpi_root_histo);
 	}
 
 	MPI_Finalize();
