@@ -4,10 +4,13 @@ include_directories(${PROJECT_SOURCE_DIR})
 
 add_executable(${PROJECT_NAME}
 	app.cpp
-	${PROJECT_SOURCE_DIR}/src/mpi_histo_impl.cpp
-	${PROJECT_SOURCE_DIR}/src/arg_parser_impl.cpp
-	${PROJECT_SOURCE_DIR}/src/histo_io_impl.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} ${MPI_LIBRARIES})
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}
+	PUBLIC ${MPI_LIBRARIES}
+	PUBLIC ${Boost_LIBRARIES}
+	PUBLIC mpi_histo_from_dir_lib
+	PUBLIC print_directory_lib
+	PUBLIC arg_parser_lib
+	PUBLIC histo_io_lib
+)

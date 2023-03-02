@@ -17,6 +17,7 @@ add_library(mpi_histo_from_dir_lib
 )
 
 add_library(print_directory_lib
+	SHARED
 	print_directory_impl.cpp
 	${HEADER_PRINT_DIRECTORY}
 )
