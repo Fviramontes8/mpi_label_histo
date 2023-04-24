@@ -41,11 +41,11 @@ Brings up program's help message which shows available program options, this is 
 ```
 Permitted options:
   -h [ --help ]         Show the help message
-  -p [ --path ] arg     Required path to directory to calculate histogram, it 
+  -p [ --path ] arg     Required path to directory to calculate histogram, it
                         should be relative to the executable path
-  -s [ --size ] arg     Size of histogram, typically the number of classes in 
+  -s [ --size ] arg     Size of histogram, typically the number of classes in
                         dataset
-  -o [ --outfile ] arg  Filename (.txt) where resulting histogram will be 
+  -o [ --outfile ] arg  Filename (.txt) where resulting histogram will be
                         stored
 ```
 
@@ -72,3 +72,10 @@ class_number x_centroid y_centroid width height
 ![Example image with label visualized](https://user-images.githubusercontent.com/26833433/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg)
 
 ![Corresponding label file](https://user-images.githubusercontent.com/26833433/112467037-d2568c00-8d66-11eb-8796-55402ac0d62f.png)
+
+## Visualizing Histograms
+After running the mpi_label_histo, histogram data is written to a text file. To generate the histogram image, run the following (replace `/path/to/text/file` with the relative path to where you stored the text file generated above).
+
+```sh
+python3 label_visualizer.py --file-path /path/to/text/file
+```
