@@ -11,23 +11,23 @@ set(HEADER_HISTO_IO
 	"${mpi_label_histo_SOURCE_DIR}/include/histo_io.hpp"
 )
 
-add_library(mpi_histo_from_dir_lib
+add_library(mpi_histo_from_dir
 	mpi_histo_impl.cpp
 	${HEADER_MPI_HISTO_DIR}
 )
 
-add_library(print_directory_lib
+add_library(print_directory
 	SHARED
 	print_directory_impl.cpp
 	${HEADER_PRINT_DIRECTORY}
 )
 
-add_library(arg_parser_lib
+add_library(arg_parser
 	arg_parser_impl.cpp
 	${HEADER_PRINT_DIRECTORY}
 )
 
-add_library(histo_io_lib
+add_library(histo_io
 	histo_io_impl.cpp
 	${HEADER_PRINT_DIRECTORY}
 )

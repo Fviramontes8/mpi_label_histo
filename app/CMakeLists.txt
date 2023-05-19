@@ -9,8 +9,8 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
 	PUBLIC ${MPI_LIBRARIES}
 	PUBLIC ${Boost_LIBRARIES}
-	PUBLIC mpi_histo_from_dir_lib
-	PUBLIC print_directory_lib
-	PUBLIC arg_parser_lib
-	PUBLIC histo_io_lib
+	PUBLIC mpi_histo_from_dir
+	PUBLIC print_directory
+	PUBLIC arg_parser
+	PUBLIC histo_io
 )
