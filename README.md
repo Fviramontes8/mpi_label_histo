@@ -79,3 +79,25 @@ After running the mpi_label_histo, histogram data is written to a text file. To 
 ```sh
 python3 label_visualizer.py --file-path /path/to/text/file
 ```
+Running the following should bring up the program's help message that shows the available options.
+
+```sh
+python3 label_visualizer.py -h
+```
+The output should look like:
+
+```
+usage: label_visualizer.py [-h] --file-path FILE_PATH [--title TITLE] [--x-label X_LABEL] [--y-label Y_LABEL]
+
+Script to plot data from mpi_label_histo
+
+options:
+  -h, --help            show this help message and exit
+  --file-path FILE_PATH
+                        File to open with histogram data
+  --title TITLE         Title for histogram
+  --x-label X_LABEL     x-axis label of histogram
+  --y-label Y_LABEL     y-axis label of histogram
+```
+
+Note that the `--file-path` is required.
