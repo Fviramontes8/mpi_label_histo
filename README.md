@@ -74,8 +74,31 @@ class_number x_centroid y_centroid width height
 ![Corresponding label file](https://user-images.githubusercontent.com/26833433/112467037-d2568c00-8d66-11eb-8796-55402ac0d62f.png)
 
 ## Visualizing Histograms
+
 After running the mpi_label_histo, histogram data is written to a text file. To generate the histogram image, run the following (replace `/path/to/text/file` with the relative path to where you stored the text file generated above).
 
 ```sh
 python3 label_visualizer.py --file-path /path/to/text/file
 ```
+Running the following should bring up the program's help message that shows the available options.
+
+```sh
+python3 label_visualizer.py -h
+```
+The output should look like:
+
+```
+usage: label_visualizer.py [-h] --file-path FILE_PATH [--title TITLE] [--x-label X_LABEL] [--y-label Y_LABEL]
+
+Script to plot data from mpi_label_histo
+
+options:
+  -h, --help            show this help message and exit
+  --file-path FILE_PATH
+                        File to open with histogram data
+  --title TITLE         Title for histogram
+  --x-label X_LABEL     x-axis label of histogram
+  --y-label Y_LABEL     y-axis label of histogram
+```
+
+Note that the `--file-path` is required.
