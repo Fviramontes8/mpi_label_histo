@@ -74,7 +74,6 @@ class_number x_centroid y_centroid width height
 ![Corresponding label file](https://user-images.githubusercontent.com/26833433/112467037-d2568c00-8d66-11eb-8796-55402ac0d62f.png)
 
 ## Visualizing Histograms
-
 After running the mpi_label_histo, histogram data is written to a text file. To generate the histogram image, run the following (replace `/path/to/text/file` with the relative path to where you stored the text file generated above).
 
 ```sh
